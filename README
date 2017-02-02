@@ -1,0 +1,61 @@
+CS111 - Project 2B: Complex Critical Sections   Uday Shankar Alla  404428077
+=========================================================================
+Makefile
+=========================================================================
+working targets
+default: build the executable
+clean: remove all the intermediary files created when building the executable
+dist: tarring the respective contents.
+=========================================================================
+Graphs
+=========================================================================
+1)Graph1-costperop.png
+This graph illustrates the cost per operation (non-yield) as a function of the
+number of iterations, with a single thread. The graph takes the U shape.
+as the iterations increase the overheads get finely divided among the
+operations giving us a more correct time for the cost per operation.
+
+
+2)Graph2-synchonizations.png
+Using a large enough number of iterations, the average time per operation
+(non-yield) for a range of threads values was noted. I then graphed the performance
+(time per operation) of all four versions
+(unprotected, mutex, spin-lock) vs the number of threads.
+
+============================================================================
+Analysis
+============================================================================
+
+QUESTION 2B.1A:
+Explain the variation in time per operation vs the number of iterations?
+A)When the number of operations is larger the overhead cost(such as joining
+  and creating threads is divided and distributed finely among each operation.
+  As we can see the from the graph the cost per operation first decreases and
+  then increases as when the number of iterations is increased the number of
+  elements in the sorted list increase. As we know the cost of searches,
+  lookups and insertions in such a sortedlist are directly proportional to the
+  length of the list. And therefore as iterations increase the overhead costs
+  get finely divided among the operations however the operations themselves
+  are proportional to the length of the list.
+
+QUESTION 2B.1B:
+How would you propose to correct for this effect?
+A)The timing inconsistencies due to overheads can be corrected by taking a
+  large number of iterations/threads. By measuring the time taken per operation
+  for a large number of operations the overheads get finely distributed
+  and therefore will eventuall get  diluted to a point where they have no
+  impact on the final timing(therefore time per op reaches a limit). The
+  correct measurement is therefore this limiting value.
+
+QUESTIONS 2B.2A:
+Compare the variation in time per protected operation vs the number of threads in
+Project 2B and in Project 2A.  Explain the difference.
+A) The time per operation in part 1 is significantly smaller than the time per
+   operation in part 2. The reason for the time per operation in part 2 being
+   much higher is due the higher complexity of the operations being performed 
+   (insertion and lookup/delete). In part 2 we perform the operations on a
+   sorted Linked List that grows with the growth in threads. As explained earlier
+   the cost of operation is directly proprtional to the length of the list unlike
+   in part 1 where the value of the couter had no effect on the operations being
+   performed. Therefore part 2 will have a larger execution time than part 1 for
+   the same number of  operations.
